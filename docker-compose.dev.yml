@@ -1,0 +1,40 @@
+version: '3.9'
+
+services:
+  gary-app-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: gary-assistant-dev
+    ports:
+      - "8080:8080"
+      - "5005:5005"  # Debug port
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+      SPRING_DATASOURCE_URL: jdbc:h2:mem:garydb
+      SPRING_DATA_REDIS_HOST: redis-dev
+      SPRING_DATA_REDIS_PORT: 6379
+      JAVA_TOOL_OPTIONS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
+    depends_on:
+      - redis-dev
+    networks:
+      - gary-dev-network
+    restart: unless-stopped
+    volumes:
+      - ./src:/app/src:ro  # Mount source for hot reload
+    mem_limit: 512m
+    cpus: 1.0
+
+  redis-dev:
+    image: redis:7-alpine
+    container_name: gary-redis-dev
+    command: redis-server --maxmemory 128mb --maxmemory-policy allkeys-lru
+    ports:
+      - "6379:6379"
+    networks:
+      - gary-dev-network
+    restart: unless-stopped
+
+networks:
+  gary-dev-network:
+    driver: bridge
