@@ -1,39 +1,40 @@
 package com.gary.assistant.controller;
 
 import com.gary.assistant.service.ScraperService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.web.servlet.MockMvc;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.http.ResponseEntity;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import java.util.Map;
 
-@WebMvcTest(HealthController.class)
-@ContextConfiguration(classes = HealthControllerTest.TestConfig.class)
+import static org.junit.jupiter.api.Assertions.*;
+
 class HealthControllerTest {
 
-    @Autowired
-    private MockMvc mockMvc;
+    private HealthController healthController;
 
-    @Configuration
-    static class TestConfig {
-        @Bean
-        public ScraperService scraperService() {
-            return Mockito.mock(ScraperService.class);
-        }
+    @Mock
+    private ScraperService scraperService;
+
+    @BeforeEach
+    void setUp() {
+        MockitoAnnotations.openMocks(this);
+        healthController = new HealthController(scraperService);
     }
 
     @Test
-    void healthCheck_ShouldReturnOk() throws Exception {
-        mockMvc.perform(get("/api/v1/health"))
-            .andExpect(status().isOk())
-            .andExpect(jsonPath("$.status").value("UP"))
-            .andExpect(jsonPath("$.service").value("Gary Assistant API"));
+    void health_ShouldReturnOk() {
+        ResponseEntity<Map<String, Object>> response = healthController.health();
+
+        assertNotNull(response);
+        assertEquals(200, response.getStatusCode().value());
+
+        Map<String, Object> body = response.getBody();
+        assertNotNull(body);
+        assertEquals("UP", body.get("status"));
+        assertEquals("Gary Assistant API", body.get("service"));
+        assertNotNull(body.get("timestamp"));
     }
 }

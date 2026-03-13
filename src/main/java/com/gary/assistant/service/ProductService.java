@@ -35,7 +35,11 @@ public class ProductService {
         long startTime = System.currentTimeMillis();
         logger.info("Starting search for query: {}", request.query());
 
-        var products = scraperService.searchAllPlatforms(request.query(), request.platforms());
+        // Use cross-platform fallback to maximize result coverage
+        var products = scraperService.searchAllPlatformsWithCrossPlatformFallback(
+            request.query(),
+            request.platforms()
+        );
 
         var savedProducts = products.stream()
             .map(this::saveOrUpdateProduct)

@@ -144,3 +144,10 @@ gary:
       rate-limit: 15
       timeout: 30000
       user-agent: "Gary/1.0 (Shopping Assistant)"
+  fallback:
+    enabled: true
+    min-results-threshold: 3
+    max-attempts: 3
+    similarity-threshold: 0.3
+    max-total-results: 20
+    cross-platform-enabled: true

@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "skills": {
+    "amazon-shopping": {
+      "source": "jlave-dev/agent-skills",
+      "sourceType": "github",
+      "computedHash": "d74a0196729305f0e66eb1849d2f1ce651c3df650d4e2c79cbac741ebc909b80"
+    },
+    "java-springboot": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "computedHash": "f1b9c6b1277178fc33e5a612761c1cd1cf6ab5f946d05d69d52026d142c0a0c1"
+    }
+  }
+}

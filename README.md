@@ -1,6 +1,17 @@
 # Gary - Smart Shopping Assistant 🐌
 
-<img src="img/gary.PNG">
+```
+        @@@@@@@
+      @@       @@
+     @  o   o   @       "Meow!"
+    @      ^     @
+    @    \___/   @      Finding you the best deals!
+     @          @
+      @@  ___  @@
+        @@   @@
+       ___|___|___
+      (___) (___)
+```
 
 Gary is your intelligent shopping companion that helps you find the best deals by comparing prices across Amazon and Mercado Livre.
 
