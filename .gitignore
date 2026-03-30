@@ -1,0 +1,90 @@
+# Maven
+target/
+target/*
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+.settings/
+.classpath
+.project
+.factorypath
+
+# Spring Boot
+application-local.yml
+application-local.properties
+
+# Logs
+logs/
+*.log
+*.log.*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# H2 Database
+*.db
+*.trace.db
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*~
+
+# Build output
+dist/
+build/
+out/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Node (if frontend is added later)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Comparison files (keep template, ignore user comparisons)
+comparisons/*
+!comparisons/README.md
+!comparisons/EXAMPLE_*.md
+/ANALYSIS-STATUS.md
+/ASCII_ART_READY.md
+/FALLBACK-IMPLEMENTATION-SUMMARY.md
+/FALLBACK-STRATEGY.md
+/GARY.md
+/IMPROVEMENTS-APPLIED.md
+/OPTIMIZATION-SUMMARY.md
+/PHASE-1-COMPLETION-SUMMARY.md
+/Makefile
+/PHASE-1-FINDINGS.md
+/PHASE-2-COMPLETION-SUMMARY.md
+/PHASE-2-FINDINGS.md
+/PHASE-3-COMPLETION-SUMMARY.md
+/PHASE-3-FINDINGS.md
+/PHASE-4-FINDINGS.md
+/PROJECT-ANALYSIS-PLAN.md
+/SCRAPER-IMPLEMENTATION.md
+/SCRAPER-TESTS-WEEK1-SUMMARY.md
+/SETUP_COMPLETE.md
+/skills-lock.json
+/.idea/
+/.agents/
+/.claude/
