@@ -1,0 +1,69 @@
+spring:
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/gary}
+    username: ${DATABASE_USERNAME:gary}
+    password: ${DATABASE_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  # Optimized HikariCP connection pool for production with virtual threads
+  hikari:
+    maximum-pool-size: 50
+    minimum-idle: 10
+    connection-timeout: 30000
+    idle-timeout: 600000
+    max-lifetime: 1800000
+    leak-detection-threshold: 60000
+
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD:}
+      # Optimized Lettuce connection pool for production
+      lettuce:
+        pool:
+          enabled: true
+          max-active: 50
+          max-idle: 20
+          min-idle: 5
+          max-wait: 1000ms
+
+  cache:
+    type: redis
+
+  # Enable virtual threads for Spring MVC (Java 21+)
+  threads:
+    virtual:
+      enabled: true
+
+server:
+  port: ${PORT:8080}
+  # Enable HTTP/2 for better performance in production
+  http2:
+    enabled: true
+  tomcat:
+    threads:
+      max: 200
+      min-spare: 10
+    connection-timeout: 30s
+    max-connections: 10000
+  error:
+    include-message: never
+    include-binding-errors: never
+    include-stacktrace: never
+    include-exception: false
+  shutdown: graceful
+
+logging:
+  level:
+    root: INFO
+    com.gary.assistant: INFO
+    org.springframework.web: WARN
